@@ -1,9 +1,11 @@
 import 'dart:wasm';
 
 import 'package:flutter/material.dart';
+import 'package:fluttershu/home/home_banner.dart';
 import 'package:fluttershu/home/home_model.dart';
 import 'package:fluttershu/utility/toast.dart';
 import 'package:fluttershu/app/request.dart';
+import 'home_menu.dart';
 
 enum HomeListType {
   excellent,
@@ -21,8 +23,6 @@ class HomeListView extends StatefulWidget {
   _HomeListViewState createState() => _HomeListViewState();
 }
 
-Widget buildModule(BuildContext context, HomeModule module) {}
-
 class _HomeListViewState extends State<HomeListView> {
   List<CarouselInfo> carouselInfos = [];
   int pageIndex = 1;
@@ -35,7 +35,10 @@ class _HomeListViewState extends State<HomeListView> {
     fetchData();
   }
 
-  Future<Void> fetchData() async {
+  @override
+  bool get wantKeepAlive => true;
+
+  Future<void> fetchData() async {
     try {
       var action;
       switch (this.widget.type) {
@@ -70,6 +73,39 @@ class _HomeListViewState extends State<HomeListView> {
     }
   }
 
+  Widget bookCardWithInfo(HomeModule module) {
+    Widget card;
+    switch (module.style) {
+//      case 1:
+//        card = NovelFourGridView(module);
+//        break;
+//      case 2:
+//        card = NovelSecondHybirdCard(module);
+//        break;
+//      case 3:
+//        card = NovelFirstHybirdCard(module);
+//        break;
+//      case 4:
+//        card = NovelNormalCard(module);
+//        break;
+    }
+    return card;
+  }
+
+  Widget buildModule(BuildContext context, HomeModule module) {
+    print("进入buildModule");
+    print(module.carousels);
+    if (module.carousels != null) {
+        print(carouselInfos.length);
+        print(carouselInfos.toList());
+        return HomeBanner(carouselInfos);
+    } else if (module.menus != null) {
+        return HomeMenu(module.menus);
+    } else if (module.books != null) {
+      return bookCardWithInfo(module);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -79,7 +115,7 @@ class _HomeListViewState extends State<HomeListView> {
               itemBuilder: (BuildContext context, int index) {
                 return buildModule(context, modules[index]);
               }),
-          onRefresh: null),
+          onRefresh: fetchData),
     );
   }
 }
