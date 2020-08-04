@@ -6,6 +6,7 @@ import 'package:fluttershu/home/home_model.dart';
 import 'package:fluttershu/utility/toast.dart';
 import 'package:fluttershu/app/request.dart';
 import 'home_menu.dart';
+import 'novel_four_grid_view.dart';
 
 enum HomeListType {
   excellent,
@@ -76,9 +77,9 @@ class _HomeListViewState extends State<HomeListView> {
   Widget bookCardWithInfo(HomeModule module) {
     Widget card;
     switch (module.style) {
-//      case 1:
-//        card = NovelFourGridView(module);
-//        break;
+      case 1:
+        card = NovelFourGridView(module);
+        break;
 //      case 2:
 //        card = NovelSecondHybirdCard(module);
 //        break;
@@ -93,12 +94,8 @@ class _HomeListViewState extends State<HomeListView> {
   }
 
   Widget buildModule(BuildContext context, HomeModule module) {
-    print("进入buildModule");
-    print(module.carousels);
     if (module.carousels != null) {
-        print(carouselInfos.length);
-        print(carouselInfos.toList());
-        return HomeBanner(carouselInfos);
+        return HomeBanner(module.carousels);
     } else if (module.menus != null) {
         return HomeMenu(module.menus);
     } else if (module.books != null) {
