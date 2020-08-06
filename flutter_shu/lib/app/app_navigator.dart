@@ -3,9 +3,6 @@ import 'package:fluttershu/model/novel.dart';
 import 'package:fluttershu/novel_detail/novel_detail_scene.dart';
 
 
-
-
-
 class AppNavigator {
   static push(BuildContext context, Widget scene) {
     Navigator.push(
