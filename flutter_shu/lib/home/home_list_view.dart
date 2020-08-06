@@ -8,6 +8,7 @@ import 'package:fluttershu/app/request.dart';
 import 'home_menu.dart';
 import 'novel_four_grid_view.dart';
 import 'novel_second_hybird_card.dart';
+import 'novel_first_hybird_card.dart';
 
 enum HomeListType {
   excellent,
@@ -84,9 +85,9 @@ class _HomeListViewState extends State<HomeListView> {
       case 2:
         card = NovelSecondHybirdCard(module);
         break;
-//      case 3:
-//        card = NovelFirstHybirdCard(module);
-//        break;
+      case 3:
+        card = NovelFirstHybirdCard(module);
+        break;
 //      case 4:
 //        card = NovelNormalCard(module);
 //        break;
