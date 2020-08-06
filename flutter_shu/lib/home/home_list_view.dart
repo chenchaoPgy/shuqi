@@ -9,6 +9,7 @@ import 'home_menu.dart';
 import 'novel_four_grid_view.dart';
 import 'novel_second_hybird_card.dart';
 import 'novel_first_hybird_card.dart';
+import 'novel_normal_card.dart';
 
 enum HomeListType {
   excellent,
@@ -88,9 +89,9 @@ class _HomeListViewState extends State<HomeListView> {
       case 3:
         card = NovelFirstHybirdCard(module);
         break;
-//      case 4:
-//        card = NovelNormalCard(module);
-//        break;
+      case 4:
+        card = NovelNormalCard(module);
+        break;
     }
     return card;
   }
