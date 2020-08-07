@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttershu/app/request.dart';
 import 'package:fluttershu/app/sq_color.dart';
 import 'package:fluttershu/app/user_manager.dart';
+import 'package:fluttershu/me/code_button.dart';
 import 'package:fluttershu/utility/toast.dart';
 
 class LoginScene extends StatefulWidget {
@@ -41,9 +42,11 @@ class _LoginSceneState extends State<LoginScene> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
+              buildPhone(),
               SizedBox(
                 height: 10,
               ),
+              buildCode(),
               SizedBox(
                 height: 10,
               ),
@@ -86,16 +89,51 @@ class _LoginSceneState extends State<LoginScene> {
       padding: EdgeInsets.symmetric(horizontal: 8),
       decoration: BoxDecoration(
           color: SQColor.paper, borderRadius: BorderRadius.circular(5)),
-      child: TextField(
-        controller: codeEditer,
-        keyboardType: TextInputType.number,
-        style: TextStyle(fontSize: 14, color: SQColor.gray),
-        decoration: InputDecoration(
-            hintText: '请输入验证码',
-            hintStyle: TextStyle(color: SQColor.gray),
-            border: InputBorder.none),
+      child: Row(
+        children: <Widget>[
+          TextField(
+            controller: codeEditer,
+            keyboardType: TextInputType.number,
+            style: TextStyle(fontSize: 14, color: SQColor.gray),
+            decoration: InputDecoration(
+                hintText: '请输入验证码',
+                hintStyle: TextStyle(color: SQColor.gray),
+                border: InputBorder.none),
+          ),
+          Container(
+            color: Color(0xffdae3f2),
+            width: 1,
+            height: 40,
+          ),
+          CodeButton(onPressed: fetchSmsCode, coldDownSeconds: coldDownSeconds)
+        ],
       ),
     );
+  }
+
+  fetchSmsCode() async {
+    if (phoneEditer.text.length == 0) {
+      return;
+    }
+    try {
+      await Request.post(
+          action: 'sms', params: {'phone': phoneEditer.text, 'type': 'login'});
+      setState(() {
+        coldDownSeconds = 60;
+      });
+      coldDown();
+    } catch (e) {
+      Toast.show(e.toString());
+    }
+  }
+
+  coldDown() {
+    timer = Timer(Duration(seconds: 1), () {
+      setState(() {
+        --coldDownSeconds;
+      });
+      coldDown();
+    });
   }
 
   login() async {
