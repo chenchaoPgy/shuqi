@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:fluttershu/app/app_navigator.dart';
 import 'package:fluttershu/me/me_cell.dart';
 import 'package:fluttershu/me/me_header.dart';
 
@@ -81,8 +82,8 @@ class _MeSenceState extends State<MeSence> {
             title: 'Github',
             iconName: 'img/me_feedback.png',
             onPressed: () {
-//              AppNavigator.pushWeb(context,
-//                  'https://github.com/huanxsd/flutter_shuqi', 'Github');
+              AppNavigator.pushWeb(context,
+                  'https://github.com/chenchaoPgy', 'Github');
             },
           ),
         ],

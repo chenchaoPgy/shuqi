@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttershu/app/app_navigator.dart';
 import 'package:fluttershu/app/user_manager.dart';
 
 class MeHeader extends StatelessWidget {

@@ -17,7 +17,7 @@ class MeCell extends StatelessWidget {
         child: Column(
           children: <Widget>[
             Container(
-              color: SQColor.gray,
+              color: SQColor.white,
               height: 60,
               padding: EdgeInsets.symmetric(horizontal: 20),
               child: Row(
