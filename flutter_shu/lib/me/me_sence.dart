@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:fluttershu/app/app_navigator.dart';
 import 'package:fluttershu/me/me_cell.dart';
 import 'package:fluttershu/me/me_header.dart';
+import 'package:fluttershu/me/setting_scene.dart';
 
 class MeSence extends StatefulWidget {
   @override
@@ -73,9 +74,9 @@ class _MeSenceState extends State<MeSence> {
             title: '设置',
             iconName: 'img/me_setting.png',
             onPressed: () {
-//              Navigator.push(context, MaterialPageRoute(builder: (context) {
-//                return SettingScene();
-//              }));
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return SettingScene();
+              }));
             },
           ),
           MeCell(

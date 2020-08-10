@@ -86,19 +86,21 @@ class _LoginSceneState extends State<LoginScene> {
 
   Widget buildCode() {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 8),
+      padding: EdgeInsets.only(left: 8),
       decoration: BoxDecoration(
           color: SQColor.paper, borderRadius: BorderRadius.circular(5)),
       child: Row(
         children: <Widget>[
-          TextField(
-            controller: codeEditer,
-            keyboardType: TextInputType.number,
-            style: TextStyle(fontSize: 14, color: SQColor.gray),
-            decoration: InputDecoration(
-                hintText: '请输入验证码',
-                hintStyle: TextStyle(color: SQColor.gray),
-                border: InputBorder.none),
+          Flexible(
+            child: TextField(
+              controller: codeEditer,
+              keyboardType: TextInputType.phone,
+              style: TextStyle(fontSize: 14, color: SQColor.darkGray),
+              decoration: InputDecoration(
+                  hintText: '请输入验证码',
+                  hintStyle: TextStyle(color: SQColor.gray),
+                  border: InputBorder.none),
+            ),
           ),
           Container(
             color: Color(0xffdae3f2),
@@ -149,5 +151,13 @@ class _LoginSceneState extends State<LoginScene> {
     } catch (e) {
       Toast.show(e.toString());
     }
+  }
+
+  @override
+  void dispose() {
+    if (timer != null) {
+      timer.cancel();
+    }
+    super.dispose();
   }
 }

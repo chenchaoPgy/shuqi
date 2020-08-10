@@ -27,6 +27,7 @@ class CodeButton extends StatelessWidget {
         child: Center(
           child: Text(
             '获取验证码',
+            textAlign: TextAlign.center,
             style: TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.normal,
