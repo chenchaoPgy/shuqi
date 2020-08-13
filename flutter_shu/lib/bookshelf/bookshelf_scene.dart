@@ -1,9 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttershu/app/request.dart';
 import 'package:fluttershu/app/sq_color.dart';
 import 'package:fluttershu/bookshelf/bookshelf_header.dart';
 import 'package:fluttershu/model/novel.dart';
+import 'package:fluttershu/utility/screen.dart';
 import 'package:fluttershu/utility/toast.dart';
 
 class BookshelfScene extends StatefulWidget {
@@ -44,6 +46,7 @@ class _BookshelfSceneState extends State<BookshelfScene> {
                   ],
                 ),
                 onRefresh: fetchData),
+            buildNavigationBar(),
           ],
         ),
       ),
@@ -64,5 +67,37 @@ class _BookshelfSceneState extends State<BookshelfScene> {
     } catch (e) {
       Toast.show(e.toString());
     }
+  }
+
+  Widget buildNavigationBar() {
+    return Stack(
+      children: <Widget>[
+        Positioned(
+          right: 0,
+          child: Container(
+            margin: EdgeInsets.fromLTRB(5, Screen.topSafeHeight, 0, 0),
+            child: buildActions(SQColor.white),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget buildActions(Color iconColor) {
+    return Row(
+      children: <Widget>[
+        Container(
+          height: kToolbarHeight,
+          width: 44,
+          child: Image.asset('img/actionbar_checkin.png', color: iconColor),
+        ),
+        Container(
+          height: kToolbarHeight,
+          width: 44,
+          child: Image.asset('img/actionbar_search.png', color: iconColor),
+        ),
+        SizedBox(width: 15),
+      ],
+    );
   }
 }

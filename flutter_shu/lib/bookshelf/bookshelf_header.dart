@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttershu/app/app_navigator.dart';
+import 'package:fluttershu/app/sq_color.dart';
 import 'package:fluttershu/bookshelf/bookshelf_cloud_widget.dart';
 import 'package:fluttershu/model/novel.dart';
 import 'package:fluttershu/utility/screen.dart';
@@ -35,6 +36,13 @@ class _BookshelfHeaderState extends State<BookshelfHeader>
       }
     });
     controller.forward();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    controller.dispose();
   }
 
   @override
@@ -84,12 +92,43 @@ class _BookshelfHeaderState extends State<BookshelfHeader>
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             DecoratedBox(
-                child: NovelCoverImage(
-                  novel.imgUrl,
-                  width: 120,
-                  height: 120,
-                ),
-                decoration: BoxDecoration(boxShadow: Styles.borderShadow)),
+              child: NovelCoverImage(
+                novel.imgUrl,
+                width: 120,
+                height: 160,
+              ),
+              decoration: BoxDecoration(boxShadow: Styles.borderShadow),
+            ),
+            SizedBox(
+              width: 20,
+            ),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  SizedBox(
+                    height: 40,
+                  ),
+                  Text(
+                    novel.name,
+                    style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Row(
+                    children: <Widget>[
+                      Text('读至0.2%     继续阅读 ',
+                          style: TextStyle(fontSize: 14, color: SQColor.paper)),
+                      Image.asset('img/bookshelf_continue_read.png'),
+                    ],
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),
